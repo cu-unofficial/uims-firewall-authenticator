@@ -9,10 +9,11 @@ response = requests.get(login_url)
 soup = BeautifulSoup(response.text, "html.parser")
 authenticate = soup.find("input", {"name":"magic"})
 
-login_data = {"4Tredir":  login_url,
-              "magic":    authenticate["value"],
-              "username": "17bcs1752",
-              "password": "geez :)"}
+def connect(username, password):
+    login_data = {"4Tredir": login_url,
+                  "magic": authenticate["value"],
+                  "username": username,
+                  "password": password}
 
-response = requests.post(BASE_LOGIN_URL, data=login_data)
-print(response.text)
+    response = requests.post(BASE_LOGIN_URL, data=login_data)
+    print(response.text)
