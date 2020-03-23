@@ -1,20 +1,21 @@
-"""App.
+import argparse
 
-Usage:
-  App.py -h | --help
-  App.py --version
-  App.py connect <username> <password>
 
-Options:
-  -h --help     Show this screen.
-  --version     Show version.
+def pri(username):
+    print(username)
+    password = input("Enter your password: \n")
+    import log
+    log.connect(username=username, password=password)
 
-"""
-
-from docopt import docopt
-import log
 
 if __name__ == '__main__':
-    arguments = docopt(__doc__, version="0.0.1")
-    if arguments['connect']:
-        log.connect(username=arguments['<username>'],password=['<password>'])
+    parser = argparse.ArgumentParser(description="uims-firewall-authenticator")
+    parser.add_argument(
+        'login',
+        metavar='L',
+        type=str,
+        nargs='+',
+        help="Login into your uims account"
+    )
+    args = parser.parse_args()
+    pri(args.login[0])
